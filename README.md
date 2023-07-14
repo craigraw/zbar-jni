@@ -58,7 +58,7 @@ If you have installed all needed dependencies, all you need to do is to run:
 
 ```
 autoreconf -vfi
-./configure --without-qt --without-gtk --without-python --without-imagemagick --disable-video --with-java=no
+./configure --without-qt --without-gtk --without-python --without-imagemagick --without-x --without-dbus --without-jpeg --disable-video --with-java=no
 make
 ```
 
