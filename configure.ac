@@ -768,6 +768,9 @@ AS_IF([test "x$JAVA_CFLAGS" = "x" && test "x$JAVA_HOME" != "x"],
 AS_IF([test -d "$JAVA_HOME/include/linux"],
   [JAVA_CFLAGS="$JAVA_CFLAGS -I$JAVA_HOME/include/linux"])
 
+AS_IF([test -d "$JAVA_HOME/include/darwin"],
+  [JAVA_CFLAGS="$JAVA_CFLAGS -I$JAVA_HOME/include/darwin"])
+
 AS_IF([test "x$with_java" != "xno"],
   [CPPFLAGS_save="$CPPFLAGS"
    CPPFLAGS="$CPPFLAGS $JAVA_CFLAGS"

@@ -1,7 +1,7 @@
 lib_LTLIBRARIES = libzbar.la
-libzbar_la_CPPFLAGS = $(AM_CPPFLAGS)
+libzbar_la_CPPFLAGS = $(JAVA_CFLAGS) $(AM_CPPFLAGS)
 libzbar_la_LDFLAGS = -no-undefined -version-info $(LIB_VERSION) \
-    -export-symbols-regex "^(zbar|_zbar.*_error)_.*" $(AM_LDFLAGS)
+    $(AM_LDFLAGS)
 libzbar_la_LIBADD = $(LTLIBICONV)
 
 libzbar_la_SOURCES = debug.h config.c \
@@ -12,7 +12,7 @@ libzbar_la_SOURCES = debug.h config.c \
     event.h thread.h \
     window.h window.c video.h video.c \
     img_scanner.h img_scanner.c scanner.c \
-    decoder.h decoder.c misc.h misc.c
+    decoder.h decoder.c misc.h misc.c zbarjni.h zbarjni.c
 
 EXTRA_libzbar_la_SOURCES = svg.h svg.c
 
