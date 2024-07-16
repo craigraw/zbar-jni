@@ -1,7 +1,7 @@
 changecom()dnl
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.68])
-AC_INIT([zbar],[0.23.92],[mchehab+huawei@kernel.org])
+AC_INIT([zbar],[0.23.93],[mchehab+huawei@kernel.org])
 m4_ifndef([AC_LANG_DEFINES_PROVIDED],
           [m4_define([AC_LANG_DEFINES_PROVIDED])])
 AC_CONFIG_AUX_DIR(config)
@@ -663,23 +663,23 @@ AC_ARG_WITH([qt6],
 
 AS_IF([test "x$with_qt" != "xno"],
       [AS_IF([test "x$with_qt6" != "xno"],
-	     PKG_CHECK_MODULES([QT],
+	     [PKG_CHECK_MODULES([QT],
                                [Qt6],
-                               [MOC=`pkg-config Qt6 --variable=moc`
+                               [MOC=`$PKG_CONFIG Qt6 --variable=moc`
                                 QT_VERSION=`$PKG_CONFIG Qt6 --modversion`
-                                QT6_HEADERS=`pkg-config Qt6 --variable=headerdir`
+                                QT6_HEADERS=`$PKG_CONFIG Qt6 --variable=headerdir`
                                 CPPFLAGS="$CPPFLAGS -I$QT6_HEADERS -I$QT6_HEADERS/QtWidgets -I$QT6_HEADERS/QtCore -I$QT6_HEADERS/QtGui"
                                 qt_pkgconfig_file="zbar-qt5.pc"
                                ],
-                               [with_qt6="no"]))
+                               [with_qt6="no"])])
        AS_IF([test "x$with_qt6" = "xno"],
-             PKG_CHECK_MODULES([QT],
+             [PKG_CHECK_MODULES([QT],
                                [Qt5Core >= 5 Qt5Gui >= 5 Qt5Widgets >= 5.0 Qt5X11Extras >= 5.0],
-                               [MOC=`pkg-config Qt5 --variable=moc`
-                                QT_VERSION=`$PKG_CONFIG Qt5 --modversion`
+                               [AC_CHECK_PROGS([MOC], [moc-qt5 moc])
+                                QT_VERSION=`$PKG_CONFIG Qt5Gui --modversion`;
                                 qt_pkgconfig_file="zbar-qt5.pc"
                                ],
-                               [with_qt="no"]))
+                               [with_qt="no"])])
       ])
 
 AC_ARG_VAR([MOC], [full path to Qt moc program])
